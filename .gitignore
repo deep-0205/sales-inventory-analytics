@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+db/analytics.db
+data/raw/
+data/processed/
+logs/
+.DS_Store
