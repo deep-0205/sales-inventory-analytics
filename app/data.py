@@ -11,6 +11,7 @@ def ensure_db():
     """On a fresh deploy there is no DB file, so build it from the committed sample CSVs."""
     if not config.DB_PATH.exists():
         from etl.load import build_db
+
         build_db(src=str(config.SAMPLE_DIR), db=str(config.DB_PATH))
 
 

@@ -28,19 +28,28 @@ def sidebar_filters(df: pd.DataFrame):
 
     start = _to_date(qp.get("from"), lo)
     end = _to_date(qp.get("to"), hi)
-    start, end = min(max(start, lo), hi), min(max(end, lo), hi)   # clamp to the data's range
+    start, end = (
+        min(max(start, lo), hi),
+        min(max(end, lo), hi),
+    )  # clamp to the data's range
     if start > end:
         start, end = lo, hi
 
     st.sidebar.header("Filters")
-    picked = st.sidebar.date_input("Date range", value=(start, end), min_value=lo, max_value=hi)
+    picked = st.sidebar.date_input(
+        "Date range", value=(start, end), min_value=lo, max_value=hi
+    )
     if not isinstance(picked, (tuple, list)) or len(picked) != 2:
         st.info("Select an end date to continue.")
         st.stop()
     start, end = picked
 
     selections = {}
-    for col, label in [("category", "Category"), ("region", "Region"), ("segment", "Segment")]:
+    for col, label in [
+        ("category", "Category"),
+        ("region", "Region"),
+        ("segment", "Segment"),
+    ]:
         options = sorted(df[col].dropna().unique())
         default = [v for v in qp.get_all(col) if v in options]
         selections[col] = st.sidebar.multiselect(label, options, default=default)

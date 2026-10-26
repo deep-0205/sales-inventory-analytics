@@ -23,5 +23,11 @@ st.caption("First and last months may be partial.")
 
 left, right = st.columns(2)
 skus = kpis.by_dimension(df, "sku")
-left.plotly_chart(charts.top_bottom_bar(skus.head(10), "net_revenue", "sku", "Top 10 SKUs"), width="stretch")
-right.plotly_chart(charts.top_bottom_bar(skus.tail(10), "net_revenue", "sku", "Bottom 10 SKUs"), width="stretch")
+left.plotly_chart(
+    charts.top_bottom_bar(skus.head(10), "net_revenue", "sku", "Top 10 SKUs"),
+    width="stretch",
+)
+right.plotly_chart(
+    charts.top_bottom_bar(skus.tail(10), "net_revenue", "sku", "Bottom 10 SKUs"),
+    width="stretch",
+)
